@@ -1,0 +1,102 @@
+' Gambas class file
+
+
+Private viborita As Serpiente
+Private Apple As Manzana
+'Private Bonustimer As BonusT
+Private iPasos As Integer
+
+Public Sub BStart_Click()
+
+   viborita = New Serpiente(120, 120, 123432, "W")
+   Apple = New Manzana(120, 20, 160, 160)
+   Crono.Start()
+   
+
+End 
+
+Public Sub BPause_Click()
+
+If Crono.Enabled = True Then 
+    Crono.Stop()
+    
+    Else If Crono.Enabled = False And viborita = Null Then
+       Message.Info("Dale a Start para comenzar")
+
+    Else 
+      Crono.Start()
+  
+Endif
+
+End
+
+
+
+
+
+Public Sub Crono_Timer()
+  iPasos = iPasos + 1
+  
+If iPasos = 3 Then 
+    viborita.crecer()
+    iPasos = 1
+    LPuntos.Text += 10
+  Else
+  viborita.moverse()  
+  
+Endif
+
+If viborita.estasMuerta(DrawingArea1) = True Then
+  Crono.Stop()
+  Message.Info("Se acabó")
+  LPuntos.Text = 0
+  
+Endif
+
+
+
+DrawingArea1.Refresh()
+End
+
+
+
+Public Sub DrawingArea1_Draw()
+
+
+  If (viborita <> Null) Then
+      viborita.Pintarse(DrawingArea1)
+  Endif 
+  
+  If (Apple <> Null) Then 
+    Apple.Pintarse(DrawingArea1)
+  Endif
+  
+
+End 
+  
+  Public Sub DrawingArea1_KeyPress()
+  
+  If (Key.Text = "W" Or Key.Text = "S" Or Key.Text = "A" Or Key.Text = "D") Then 
+    viborita.cambiaDir(Key.Text)
+  Endif
+
+End 
+
+Public Sub Form_KeyPress()
+  
+  If (Key.Text = "W" Or Key.Text = "S" Or Key.Text = "A" Or Key.Text = "D") Then 
+    viborita.cambiaDir(Key.Text)
+  Endif
+'Tambien se podría poner DrawingArea1_KeyPress()
+End 
+
+
+
+
+
+Public Sub Form_Open()
+
+  
+
+End
+
