@@ -1,16 +1,15 @@
 ' Gambas class file
 
-
+Private Apple As Cuadrado
 Private viborita As Serpiente
-Private Apple As Manzana
-'Private Bonustimer As BonusT
 Private iPasos As Integer
 
 Public Sub BStart_Click()
 
-   viborita = New Serpiente(120, 120, 123432, "W")
-   Apple = New Manzana(120, 20, 160, 160)
+   viborita = New Serpiente(20, 20, 1, "D")
+   Apple = New Cuadrado(Color.Red, 20, Rand(10, 490 / 20) * 20 - 20, Rand(10, 390 / 20) * 20 - 20)
    Crono.Start()
+   LPuntos.Text = 0
    
 
 End 
@@ -28,6 +27,7 @@ If Crono.Enabled = True Then
   
 Endif
 
+
 End
 
 
@@ -38,20 +38,31 @@ Public Sub Crono_Timer()
   iPasos = iPasos + 1
   
 If iPasos = 3 Then 
-    viborita.crecer()
+    
     iPasos = 1
-    LPuntos.Text += 10
+    
   Else
   viborita.moverse()  
   
 Endif
 
+If viborita.getPosCabezaX() = Apple.getPosX() And viborita.getPosCabezaY() = Apple.getPosY() Then 
+  If viborita.estaColisionando(Apple) Then 
+  Apple = New Cuadrado(Color.Red, 20, Rand(10, 490 / 20) * 20 - 20, Rand(10, 380 / 20) * 20 - 20)
+  viborita.crecer()
+  LPuntos.Text += 10
+  Endif 
+Endif
+
 If viborita.estasMuerta(DrawingArea1) = True Then
   Crono.Stop()
   Message.Info("Se acabó")
+  viborita = Null
+  Apple = Null
   LPuntos.Text = 0
   
 Endif
+
 
 
 
@@ -66,10 +77,9 @@ Public Sub DrawingArea1_Draw()
   If (viborita <> Null) Then
       viborita.Pintarse(DrawingArea1)
   Endif 
-  
-  If (Apple <> Null) Then 
-    Apple.Pintarse(DrawingArea1)
-  Endif
+    If (Apple <> Null) Then
+      Apple.PintarseM(DrawingArea1)
+  Endif 
   
 
 End 
@@ -86,11 +96,12 @@ Public Sub Form_KeyPress()
   
   If (Key.Text = "W" Or Key.Text = "S" Or Key.Text = "A" Or Key.Text = "D") Then 
     viborita.cambiaDir(Key.Text)
+    
   Endif
+
+
 'Tambien se podría poner DrawingArea1_KeyPress()
 End 
-
-
 
 
 
@@ -99,4 +110,3 @@ Public Sub Form_Open()
   
 
 End
-

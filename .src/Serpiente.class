@@ -87,14 +87,16 @@ End
 
 Public Sub cambiaDir(letra As String)
 
+
   'Si letra es W,A,S,D y ninguna mas, entonces, ignora la la direccion.
   If letra = "W" Or letra = "A" Or letra = "S" Or letra = "D" Then 
   
         direccion = letra
-        
-  Endif
-  
+
+Endif 
+
 End
+
 
 
 Public Function estasMuerta(tablero As DrawingArea) As Boolean
@@ -118,6 +120,8 @@ For iContador = 4 To miCuerpo.Count - 1
 Next
 
 Return bResultado
+
+
   
   'bResultado = False
 'If cabeza.Serpiente = hasChochado Then 
@@ -139,6 +143,16 @@ Return bResultado
 
 End 
 
+Public Sub estaColisionando(cuadrado As Cuadrado) As Boolean
+ 
+ 
+  If miCuerpo.First.colisiona(cuadrado) Then
+     Return True
+    Endif
+
+
+    Return False
+End
 
 
 'getters
@@ -146,6 +160,18 @@ End
 Public Function getPosCabeza() As Object
   
   Return miCuerpo.First
+  
+End
+
+Public Function getPosCabezaX() As Short
+  
+  Return miCuerpo.First.getPosX()
+  
+End
+
+Public Function getPosCabezaY() As Short
+  
+  Return miCuerpo.First.getPosY()
   
 End
 

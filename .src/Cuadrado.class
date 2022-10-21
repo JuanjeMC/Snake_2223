@@ -64,16 +64,39 @@ End
 Public Sub Pintarse(tablero As DrawingArea)
   
   Dim colorLoteria As Integer
-  colorLoteria = Color.RGB(Rand(0, 255), Rand(0, 255), Rand(0, 255))
   
+  colorLoteria = Color.RGB(Rand(0, 0), Rand(150, 250), Rand(0, 0) + Color.RGB(Rand(0, 0), Rand(0, 0), Rand(150, 200))) 
   Paint.Begin(tablero)
   Paint.Brush = Paint.Color(colorLoteria)
-  Paint.Rectangle(posX, posY, lado, lado)
+  Paint.Rectangle(posX, posY, lado, lado, 5)
   Paint.Fill
   Paint.End
 
   
 End 
+
+Public Sub PintarseM(tablero As DrawingArea)
+  
+  Dim colorLoteria As Integer
+  
+  colorLoteria = Color.RGB(Rand(150, 250), Rand(0, 0), Rand(0, 0))
+  Paint.Begin(tablero)
+  Paint.Brush = Paint.Color(colorLoteria)
+  Paint.Rectangle(posX, posY, lado, lado, 50)
+  Paint.Fill
+  Paint.End
+
+  
+End 
+Public Function colisiona(otroCuadrado As Cuadrado) As Boolean
+ Dim cResultado As Boolean
+  cResultado = False
+    If posX = otroCuadrado.getPosX() And posY = otroCuadrado.getPosY() Then 
+    cResultado = True
+    Endif 
+
+    Return cResultado
+End
 
 'Getters
 Public Function getColor() As Integer
@@ -98,12 +121,4 @@ End
 
 
 
-Public Function colisiona(otroCuadrado As Cuadrado) As Boolean
- Dim cResultado As Boolean
-  cResultado = False
-    If posX = otroCuadrado.getPosX() And posY = otroCuadrado.getPosY() Then 
-    cResultado = True
-    Endif 
-    
-    Return cResultado
-End
+

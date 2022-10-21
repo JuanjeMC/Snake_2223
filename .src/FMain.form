@@ -12,7 +12,7 @@
   { DrawingArea1 DrawingArea
     MoveScaled(11,17,71.4286,57.1429)
     Background = Color.Black
-    Border = Border.Raised
+    Border = Border.Plain
   }
   { LPuntos Label
     MoveScaled(17,10,19,6)
@@ -36,6 +36,6 @@
   }
   { Crono #Timer
     #MoveScaled(42,80)
-    Delay = 150
+    Delay = 50
   }
 }
