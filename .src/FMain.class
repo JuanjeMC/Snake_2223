@@ -1,15 +1,22 @@
 ' Gambas class file
 
+Private Veneno As Cuadrado
 Private Apple As Cuadrado
 Private viborita As Serpiente
 Private iPasos As Integer
 
-Public Sub BStart_Click()
 
+Public Sub BStart_Click()
+  
+  
+   
    viborita = New Serpiente(20, 20, 1, "D")
    Apple = New Cuadrado(Color.Red, 20, Rand(10, 490 / 20) * 20 - 20, Rand(10, 390 / 20) * 20 - 20)
+   Veneno = New Cuadrado(Color.Red, 20, 240, 200)
+   
    Crono.Start()
    LPuntos.Text = 0
+   
    
 
 End 
@@ -46,25 +53,65 @@ If iPasos = 3 Then
   
 Endif
 
+
 If viborita.getPosCabezaX() = Apple.getPosX() And viborita.getPosCabezaY() = Apple.getPosY() Then 
   If viborita.estaColisionando(Apple) Then 
   Apple = New Cuadrado(Color.Red, 20, Rand(10, 490 / 20) * 20 - 20, Rand(10, 380 / 20) * 20 - 20)
+  Veneno = New Cuadrado(Color.Red, 20, Rand(10, 490 / 20) * 20 - 20, Rand(10, 380 / 20) * 20 - 20)
   viborita.crecer()
   LPuntos.Text += 10
+
   Endif 
 Endif
+
+If viborita.getPosCabezaX() = Veneno.getPosX() And viborita.getPosCabezaY() = Veneno.getPosY() Then 
+  If viborita.estaColisionando(Veneno) Then 
+  Veneno = New Cuadrado(Color.Red, 20, Rand(10, 490 / 20) * 20 - 20, Rand(10, 380 / 20) * 20 - 20)
+  LPuntos.Text -= 10
+  viborita.decrecer()
+  Endif 
+Endif
+
+
+
+
+
+
+
 
 If viborita.estasMuerta(DrawingArea1) = True Then
   Crono.Stop()
   Message.Info("Se acabó")
   viborita = Null
   Apple = Null
+  Veneno = Null
   LPuntos.Text = 0
   
 Endif
 
+If LPuntos.Text = 0 Then 
+  Crono.Delay = 50
+Endif
 
+If LPuntos.Text = 20 Then 
+  Crono.Delay = 45
+Endif
 
+If LPuntos.Text = 40 Then 
+  Crono.Delay = 40
+Endif
+
+If LPuntos.Text = 60 Then 
+  Crono.Delay = 35
+Endif
+
+If LPuntos.Text = 80 Then 
+  Crono.Delay = 30
+Endif
+
+If LPuntos.Text = 100 Then 
+  Crono.Delay = 25
+Endif
 
 DrawingArea1.Refresh()
 End
@@ -75,10 +122,14 @@ Public Sub DrawingArea1_Draw()
 
 
   If (viborita <> Null) Then
-      viborita.Pintarse(DrawingArea1)
+      viborita.PintarseS(DrawingArea1)
   Endif 
     If (Apple <> Null) Then
       Apple.PintarseM(DrawingArea1)
+  Endif 
+ 
+    If (Veneno <> Null) Then
+      Veneno.PintarseV(DrawingArea1)
   Endif 
   
 
@@ -110,3 +161,5 @@ Public Sub Form_Open()
   
 
 End
+
+

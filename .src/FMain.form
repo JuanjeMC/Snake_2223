@@ -36,6 +36,6 @@
   }
   { Crono #Timer
     #MoveScaled(42,80)
-    Delay = 50
+    Delay = 60
   }
 }

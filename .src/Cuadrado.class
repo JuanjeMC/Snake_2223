@@ -61,14 +61,14 @@ End
 '####################################################
 
 'Pintarse
-Public Sub Pintarse(tablero As DrawingArea)
+Public Sub PintarseS(tablero As DrawingArea)
   
   Dim colorLoteria As Integer
   
   colorLoteria = Color.RGB(Rand(0, 0), Rand(150, 250), Rand(0, 0) + Color.RGB(Rand(0, 0), Rand(0, 0), Rand(150, 200))) 
   Paint.Begin(tablero)
   Paint.Brush = Paint.Color(colorLoteria)
-  Paint.Rectangle(posX, posY, lado, lado, 5)
+  Paint.Rectangle(posX, posY, lado, lado, 2)
   Paint.Fill
   Paint.End
 
@@ -79,7 +79,7 @@ Public Sub PintarseM(tablero As DrawingArea)
   
   Dim colorLoteria As Integer
   
-  colorLoteria = Color.RGB(Rand(150, 250), Rand(0, 0), Rand(0, 0))
+  colorLoteria = Color.RGB(Rand(250, 250), Rand(0, 0), Rand(0, 0))
   Paint.Begin(tablero)
   Paint.Brush = Paint.Color(colorLoteria)
   Paint.Rectangle(posX, posY, lado, lado, 50)
@@ -88,6 +88,23 @@ Public Sub PintarseM(tablero As DrawingArea)
 
   
 End 
+
+Public Sub PintarseV(tablero As DrawingArea)
+  
+  Dim colorLoteria As Integer
+  
+  colorLoteria = Color.RGB(Rand(100, 200), Rand(0, 0), Rand(0, 0) + Color.RGB(Rand(0, 0), Rand(0, 0), Rand(0, 250)))
+  Paint.Begin(tablero)
+  Paint.Brush = Paint.Color(colorLoteria)
+  Paint.Rectangle(posX, posY, lado, lado, 5)
+  Paint.Fill
+  Paint.End
+
+  
+End 
+
+
+
 Public Function colisiona(otroCuadrado As Cuadrado) As Boolean
  Dim cResultado As Boolean
   cResultado = False

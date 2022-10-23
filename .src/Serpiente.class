@@ -51,13 +51,13 @@ End
 '####################################################
 
 'Pintarse
-Public Sub Pintarse(tablero As DrawingArea)
+Public Sub PintarseS(tablero As DrawingArea)
 
   Dim iContador As Integer
   'tengo que conseguir cada uno de los cuadrados, uno a uno, se pinte
   
   For iContador = 0 To miCuerpo.Count - 1 '-1 porque en miCuerpo empieza desde el 0
-    miCuerpo[iContador].Pintarse(tablero)
+    miCuerpo[iContador].PintarseS(tablero)
     
   Next
 
@@ -80,10 +80,19 @@ Public Sub crecer()
       'Moverlo un paso adelante.
       nuevaCabeza.Moverse(direccion)
       
-      
-    
-  
 End 
+
+Public Sub decrecer()
+      Dim decreciendo As Boolean
+      decreciendo = False
+      If miCuerpo.Length >= 2
+      miCuerpo.Delete(0, 1)
+      Endif 
+      
+      decreciendo = True
+End 
+
+
 
 Public Sub cambiaDir(letra As String)
 
@@ -113,7 +122,7 @@ Public Function estasMuerta(tablero As DrawingArea) As Boolean
 
   Endif
   
-For iContador = 4 To miCuerpo.Count - 1 
+For iContador = 1 To miCuerpo.Count - 1 
   If (cabezaSerpiente.colisiona(miCuerpo[iContador])) Then
     bResultado = True
   Endif
@@ -153,6 +162,7 @@ Public Sub estaColisionando(cuadrado As Cuadrado) As Boolean
 
     Return False
 End
+
 
 
 'getters
