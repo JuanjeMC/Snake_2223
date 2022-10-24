@@ -93,7 +93,7 @@ Public Sub PintarseV(tablero As DrawingArea)
   
   Dim colorLoteria As Integer
   
-  colorLoteria = Color.RGB(Rand(100, 200), Rand(0, 0), Rand(0, 0) + Color.RGB(Rand(0, 0), Rand(0, 0), Rand(0, 250)))
+  colorLoteria = Color.RGB(Rand(100, 200), Rand(0, 0), Rand(0, 250))
   Paint.Begin(tablero)
   Paint.Brush = Paint.Color(colorLoteria)
   Paint.Rectangle(posX, posY, lado, lado, 5)
